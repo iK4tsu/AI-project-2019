@@ -19,6 +19,6 @@ public class AStarSearch extends InformedSearch {
 
     @Override
     public String toString() {
-        return "A* pt.ipleiria.estg.dei.ia.pl5.g13.search";
+        return "A* search";
     }
 }
