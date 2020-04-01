@@ -3,6 +3,7 @@ package pt.ipleiria.estg.dei.ia.pl5.g13.statisticsGA;
 import pt.ipleiria.estg.dei.ia.pl5.g13.experiments.Experiment;
 import pt.ipleiria.estg.dei.ia.pl5.g13.experiments.ExperimentEvent;
 import pt.ipleiria.estg.dei.ia.pl5.g13.ga.*;
+import pt.ipleiria.estg.dei.ia.pl5.g13.utils.FileOperations;
 
 import java.io.File;
 
@@ -13,7 +14,7 @@ public class StatisticBestInRun<I extends Individual, P extends Problem<I>> impl
     public StatisticBestInRun(String experimentHeader) {
         File file = new File("statistic_best_per_experiment_fitness.xls");
         if(!file.exists()){
-            pt.ipleiria.estg.dei.ia.pl5.g13.utils.FileOperations.appendToTextFile("statistic_best_per_experiment_fitness.xls", experimentHeader + "\t" + "Fitness:" + "\r\n");
+            FileOperations.appendToTextFile("statistic_best_per_experiment_fitness.xls", experimentHeader + "\t" + "Fitness:" + "\r\n");
         }
     }
 
@@ -36,7 +37,7 @@ public class StatisticBestInRun<I extends Individual, P extends Problem<I>> impl
         String experimentHeader = ((Experiment) e.getSource()).getExperimentHeader();
         String experimentConfigurationValues = ((Experiment) e.getSource()).getExperimentValues();
 
-        pt.ipleiria.estg.dei.ia.pl5.g13.utils.FileOperations.appendToTextFile("statistic_best_per_experiment_fitness.xls", experimentConfigurationValues + "\t" + bestInExperiment.getFitness() + "\r\n");
-        pt.ipleiria.estg.dei.ia.pl5.g13.utils.FileOperations.appendToTextFile("statistic_best_per_experiment.txt", "\r\n\r\n" + experimentTextualRepresentation + "\r\n" + bestInExperiment);
+        FileOperations.appendToTextFile("statistic_best_per_experiment_fitness.xls", experimentConfigurationValues + "\t" + bestInExperiment.getFitness() + "\r\n");
+        FileOperations.appendToTextFile("statistic_best_per_experiment.txt", "\r\n\r\n" + experimentTextualRepresentation + "\r\n" + bestInExperiment);
     }
 }
