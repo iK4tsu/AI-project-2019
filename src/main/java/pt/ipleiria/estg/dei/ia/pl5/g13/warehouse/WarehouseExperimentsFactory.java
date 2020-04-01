@@ -39,7 +39,7 @@ public class WarehouseExperimentsFactory extends ExperimentsFactory {
         populationSize = Integer.parseInt(getParameterValue("Population size"));
         maxGenerations = Integer.parseInt(getParameterValue("Max generations"));
 
-        //SELECTION 
+        //SELECTION
         if (getParameterValue("Selection").equals("tournament")) {
             int tournamentSize = Integer.parseInt(getParameterValue("Tournament size"));
             selection = new Tournament<>(populationSize, tournamentSize);
@@ -51,10 +51,10 @@ public class WarehouseExperimentsFactory extends ExperimentsFactory {
             case "pmx":
                 recombination = new RecombinationPartialMapped<>(recombinationProbability);
                 break;
-            case "TODO1": //TODO
+            case "TODO1": //TODO:
                 recombination = new Recombination3<>(recombinationProbability);
                 break;
-            case "TODO2": //TODO
+            case "TODO2": //TODO:
                 recombination = new Recombination2<>(recombinationProbability);
                 break;
         }
@@ -65,10 +65,10 @@ public class WarehouseExperimentsFactory extends ExperimentsFactory {
             case "insert":
                 mutation = new MutationInsert<>(mutationProbability);
                 break;
-            case "TODO1": //TODO
+            case "TODO1": //TODO:
                 mutation = new Mutation3<>(mutationProbability);
                 break;
-            case "TODO2": //TODO
+            case "TODO2": //TODO:
                 mutation = new Mutation2<>(mutationProbability);
                 break;
         }

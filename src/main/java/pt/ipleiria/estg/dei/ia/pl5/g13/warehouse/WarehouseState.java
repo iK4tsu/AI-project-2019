@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class WarehouseState extends State implements Cloneable {
 
-    //TODO this class might require the definition of additional methods and/or attributes
+    //TODO: this class might require the definition of additional methods and/or attributes
 
     private int[][] matrix;
     private int lineAgent, columnAgent;
@@ -18,7 +18,7 @@ public class WarehouseState extends State implements Cloneable {
     private int steps;
 
     public WarehouseState(int[][] matrix) {
-        //TODO
+        //TODO:
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
@@ -38,47 +38,47 @@ public class WarehouseState extends State implements Cloneable {
 
 
     public boolean canMoveUp() {
-        //TODO
+        //TODO:
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
     public boolean canMoveRight() {
-        //TODO
+        //TODO:
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
     public boolean canMoveDown() {
-        //TODO
+        //TODO:
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
     public boolean canMoveLeft() {
-        //TODO
+        //TODO:
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
     public void moveUp() {
-        //TODO
+        //TODO:
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
     public void moveRight() {
-        //TODO
+        //TODO:
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
     public void moveDown() {
-        //TODO
+        //TODO:
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
     public void moveLeft() {
-        //TODO
+        //TODO:
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
     public void setCellAgent(int line, int column) {
-        //TODO
+        //TODO:
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
@@ -155,7 +155,7 @@ public class WarehouseState extends State implements Cloneable {
 
     @Override
     public WarehouseState clone() {
-        //TODO
+        //TODO:
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 

@@ -4,11 +4,11 @@ import pt.ipleiria.estg.dei.ia.pl5.g13.ga.IntVectorIndividual;
 
 public class WarehouseIndividual extends IntVectorIndividual<WarehouseProblemForGA, WarehouseIndividual> {
 
-    //TODO this class might require the definition of additional methods and/or attributes
+    //TODO: this class might require the definition of additional methods and/or attributes
 
     public WarehouseIndividual(WarehouseProblemForGA problem, int size) {
         super(problem, size);
-        //TODO
+        //TODO:
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
@@ -18,18 +18,18 @@ public class WarehouseIndividual extends IntVectorIndividual<WarehouseProblemFor
 
     @Override
     public double computeFitness() {
-        //TODO
+        //TODO:
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
     public static int getShelfPos(int[] genome, int value) {
-        //TODO
+        //TODO:
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
     //Return the product Id if the shelf in cell [line, column] has some product and 0 otherwise
     public int getProductInShelf(int line, int column){
-        //TODO
+        //TODO:
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 

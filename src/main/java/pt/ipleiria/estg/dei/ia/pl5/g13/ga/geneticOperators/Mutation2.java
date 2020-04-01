@@ -11,13 +11,13 @@ public class Mutation2<I extends IntVectorIndividual, P extends Problem<I>> exte
 
     @Override
     public void mutate(I ind) {
-        //TODO
+        //TODO:
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 
     @Override
     public String toString() {
-        //TODO
+        //TODO:
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 }
