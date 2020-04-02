@@ -107,7 +107,7 @@ public class GeneticAlgorithm<I extends Individual, P extends Problem<I>> {
         }
     }
 
-    public synchronized void removeAGListener(GAListener listener) {
+    public synchronized void removeGAListener(GAListener listener) {
         if (listeners != null && listeners.contains(listener)) {
             listeners.remove(listener);
         }
