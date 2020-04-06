@@ -12,7 +12,7 @@ public class WarehouseProblemForGA implements Problem<WarehouseIndividual> {
 
     @Override
     public WarehouseIndividual getNewIndividual() {
-        return new WarehouseIndividual(this, agentSearch.getNumProducts());
+        return new WarehouseIndividual(this, agentSearch.getShelves().size());
     }
 
     @Override
