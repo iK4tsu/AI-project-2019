@@ -1,5 +1,9 @@
 package pt.ipleiria.estg.dei.ia.pl5.g13.ga;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.stream.IntStream;
+
 public abstract class IntVectorIndividual<P extends Problem, I extends IntVectorIndividual> extends Individual<P, I> {
 
     protected int[] genome;
@@ -7,6 +11,16 @@ public abstract class IntVectorIndividual<P extends Problem, I extends IntVector
     public IntVectorIndividual(P problem, int size) {
         super(problem);
         genome = new int[size];
+
+        //range for genome initialization
+        Integer[] productsArray = IntStream.rangeClosed(1, size).boxed().toArray(Integer[]::new);
+
+        // shuffle products
+        Collections.shuffle(Arrays.asList(productsArray), GeneticAlgorithm.random);
+
+        // set the genome with suffled values
+        for (int i = 0; i < genome.length; i++)
+            setGene(i, productsArray[i]);
       }
 
     public IntVectorIndividual(IntVectorIndividual<P, I> original) {

@@ -1,28 +1,14 @@
 package pt.ipleiria.estg.dei.ia.pl5.g13.warehouse;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedList;
-import java.util.stream.IntStream;
 
-import pt.ipleiria.estg.dei.ia.pl5.g13.ga.GeneticAlgorithm;
 import pt.ipleiria.estg.dei.ia.pl5.g13.ga.IntVectorIndividual;
 
 public class WarehouseIndividual extends IntVectorIndividual<WarehouseProblemForGA, WarehouseIndividual> {
 
     public WarehouseIndividual(WarehouseProblemForGA problem, int size) {
         super(problem, size);
-
-        //range for genome initialization
-        Integer[] productsArray = IntStream.rangeClosed(1, size).boxed().toArray(Integer[]::new);
-
-        // shuffle products
-        Collections.shuffle(Arrays.asList(productsArray), GeneticAlgorithm.random);
-
-        // set the genome with suffled values
-        for (int i = 0; i < genome.length; i++)
-            setGene(i, productsArray[i]);
     }
 
     public WarehouseIndividual(WarehouseIndividual original) {
