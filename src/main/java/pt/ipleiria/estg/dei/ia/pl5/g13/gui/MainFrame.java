@@ -2,8 +2,8 @@ package pt.ipleiria.estg.dei.ia.pl5.g13.gui;
 
 import pt.ipleiria.estg.dei.ia.pl5.g13.agentSearch.Solution;
 import pt.ipleiria.estg.dei.ia.pl5.g13.warehouse.*;
-import pt.ipleiria.estg.dei.ia.pl5.g13.experiments.Experiment;
 import pt.ipleiria.estg.dei.ia.pl5.g13.experiments.ExperimentEvent;
+import pt.ipleiria.estg.dei.ia.pl5.g13.experiments.ExperimentRunner;
 import pt.ipleiria.estg.dei.ia.pl5.g13.ga.GAEvent;
 import pt.ipleiria.estg.dei.ia.pl5.g13.ga.GAListener;
 import pt.ipleiria.estg.dei.ia.pl5.g13.ga.GeneticAlgorithm;
@@ -29,7 +29,7 @@ public class MainFrame extends JFrame implements GAListener {
     private static final long serialVersionUID = 1L;
     private WarehouseProblemForGA problemGA;
     private WarehouseState state;
-    private WarehouseAgentSearch agentSearch;
+    private WarehouseAgentSearch<WarehouseState> agentSearch;
     private Solution solution;
     private ArrayList<Integer> actionCatchProduct;
     private GeneticAlgorithm<WarehouseIndividual, WarehouseProblemForGA> ga;
@@ -128,7 +128,7 @@ public class MainFrame extends JFrame implements GAListener {
         northPanel.add(panelNorthLeft, BorderLayout.WEST);
         northPanel.add(chartPanel, BorderLayout.CENTER);
 
-        //Center panel       
+        //Center panel
         problemPanel = new PanelTextArea("Problem data: ", 15, 40);
         bestIndividualPanel = new PanelTextArea("Best solution: ", 15, 40);
         JPanel centerPanel = new JPanel(new BorderLayout());
@@ -434,39 +434,7 @@ public class MainFrame extends JFrame implements GAListener {
         worker = new SwingWorker<Void, Void>() {
             @Override
             public Void doInBackground() {
-                try {
-                    int[][] matrix = WarehouseAgentSearch.readInitialStateFromFile(new File(experimentsFactory.getFile()));
-                    WarehouseAgentSearch agentSearch = new WarehouseAgentSearch(new WarehouseState(matrix));
-
-                    LinkedList<Pair> pairs = agentSearch.getPairs();
-                    for (Pair p : pairs) {
-                        WarehouseState state = ((WarehouseState) agentSearch.getEnvironment()).clone();
-                        if (state.getLineAgent()!=p.getCell1().getLine() || state.getColumnAgent()!=p.getCell1().getColumn() )
-                            state.setCellAgent(p.getCell1().getLine(), p.getCell1().getColumn()+1);
-                        else
-                            state.setCellAgent(p.getCell1().getLine(), p.getCell1().getColumn());
-                        WarehouseProblemForSearch problem = new WarehouseProblemForSearch(state, p.getCell2());
-                        Solution s = agentSearch.solveProblem(problem);
-                        p.setValue((int) s.getCost());
-
-
-                    }
-                    problemGA = new WarehouseProblemForGA(agentSearch);
-
-
-                    while (experimentsFactory.hasMoreExperiments()) {
-                        try {
-
-                            Experiment experiment = experimentsFactory.nextExperiment(agentSearch);
-                            experiment.run();
-
-                        } catch (IOException e1) {
-                            e1.printStackTrace(System.err);
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace(System.err);
-                }
+                problemGA = new ExperimentRunner(experimentsFactory, problemGA).run();
                 return null;
             }
 
