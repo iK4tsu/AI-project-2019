@@ -1,7 +1,12 @@
 package pt.ipleiria.estg.dei.ia.pl5.g13.gui;
 
 import javax.swing.*;
+
+import pt.ipleiria.estg.dei.ia.pl5.g13.experiments.ExperimentRunner;
+
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Main {
 
@@ -24,16 +29,44 @@ public class Main {
 	frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-				} catch (Exception exception) {
-					exception.printStackTrace();
-   		}
-   		new Main();
-            }
-   	});
+	public static void main(String[] args) {
+		if (args.length == 1)
+		{
+			try {
+				ExperimentRunner runner = new ExperimentRunner(new File(args[0]));
+
+				SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+					@Override
+					public Void doInBackground() {
+						runner.run();
+						return null;
+					}
+				};
+
+				System.out.println("Starting worker for '" + args[0] + "'");
+				worker.execute();
+				while (!worker.isDone())
+				{
+					System.out.println("Worker for '" + args[0] + "' progress: " + runner.getProgress() + "%");
+					Thread.sleep(5000);
+				}
+				System.out.println("Worker for '" + args[0] + "' finished!");
+			} catch(IOException | InterruptedException ex)
+			{
+				ex.printStackTrace();
+			}
+		} else
+		{
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+					} catch (Exception exception) {
+						exception.printStackTrace();
+			   }
+			   new Main();
+				}
+		   });
+		}
     }
 }
