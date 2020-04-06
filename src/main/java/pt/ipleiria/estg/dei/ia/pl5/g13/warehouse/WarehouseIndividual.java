@@ -11,9 +11,6 @@ import pt.ipleiria.estg.dei.ia.pl5.g13.ga.IntVectorIndividual;
 
 public class WarehouseIndividual extends IntVectorIndividual<WarehouseProblemForGA, WarehouseIndividual> {
 
-    //TODO: this class might require the definition of additional methods and/or attributes
-
-
     public WarehouseIndividual(WarehouseProblemForGA problem, int size) {
         super(problem, size);
 
@@ -72,7 +69,12 @@ public class WarehouseIndividual extends IntVectorIndividual<WarehouseProblemFor
         throw new IllegalArgumentException("Invalid product " + String.valueOf(value));
     }
 
-    //Return the product Id if the shelf in cell [line, column] has some product and 0 otherwise
+    /**
+     * This methods gets a product in a speficied shelf (coordenates)
+     * @param line line position in the matrix
+     * @param column column position in the matrix
+     * @return the product id if the shelf as a prodyct and 0 otherwise
+     */
     public int getProductInShelf(int line, int column){
         LinkedList<Cell> shelves = problem.agentSearch.getShelves();
         for (int i = 0; i < shelves.size(); i++) {
@@ -107,7 +109,8 @@ public class WarehouseIndividual extends IntVectorIndividual<WarehouseProblemFor
     }
 
     /**
-     * @param i
+     * Compares if an individual is better then another by its fitness.
+     * @param i individual to compare
      * @return 1 if this object is BETTER than i, -1 if it is WORST than I and
      * 0, otherwise.
      */
