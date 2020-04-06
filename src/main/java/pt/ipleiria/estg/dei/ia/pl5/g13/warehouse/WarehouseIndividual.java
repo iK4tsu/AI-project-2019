@@ -1,15 +1,31 @@
 package pt.ipleiria.estg.dei.ia.pl5.g13.warehouse;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.stream.IntStream;
+
+import pt.ipleiria.estg.dei.ia.pl5.g13.ga.GeneticAlgorithm;
 import pt.ipleiria.estg.dei.ia.pl5.g13.ga.IntVectorIndividual;
 
 public class WarehouseIndividual extends IntVectorIndividual<WarehouseProblemForGA, WarehouseIndividual> {
 
     //TODO: this class might require the definition of additional methods and/or attributes
 
+
     public WarehouseIndividual(WarehouseProblemForGA problem, int size) {
         super(problem, size);
-        //TODO:
-        throw new UnsupportedOperationException("Not implemented yet.");
+
+        //range for genome initialization
+        Integer[] productsArray = IntStream.rangeClosed(1, size).boxed().toArray(Integer[]::new);
+
+        // shuffle products
+        Collections.shuffle(Arrays.asList(productsArray), GeneticAlgorithm.random);
+
+        // set the genome with suffled values
+        for (int i = 0; i < genome.length; i++)
+            setGene(i, productsArray[i]);
     }
 
     public WarehouseIndividual(WarehouseIndividual original) {
@@ -18,19 +34,60 @@ public class WarehouseIndividual extends IntVectorIndividual<WarehouseProblemFor
 
     @Override
     public double computeFitness() {
-        //TODO:
-        throw new UnsupportedOperationException("Not implemented yet.");
+        fitness = 0;
+        ArrayList<Request> requests = problem.agentSearch.getRequests();
+
+        for (int i = 0; i < requests.size(); i++) {
+            Cell agent = problem.agentSearch.getCellAgent();
+            Request request = requests.get(i);
+            for (int product : request.getRequest()) {
+                int idxShelf = getShelfPos(this.genome, product);
+                Cell destination = problem.agentSearch.getShelves().get(idxShelf);
+                fitness += getPairValue(agent, destination);
+                agent = destination;
+            }
+            fitness += getPairValue(agent, problem.agentSearch.getCellAgent());
+        }
+
+        return fitness;
+    }
+
+    private int getPairValue(Cell c1, Cell c2)
+    {
+        for(Pair pair : (LinkedList<Pair>) problem.agentSearch.getPairs())
+        {
+            if (pair.equals(c1, c2))
+                return pair.getValue();
+        }
+
+        throw new IllegalArgumentException("Pair not found");
     }
 
     public static int getShelfPos(int[] genome, int value) {
-        //TODO:
-        throw new UnsupportedOperationException("Not implemented yet.");
+        for (int i = 0; i < genome.length; i++) {
+            if (genome[i] == value)
+                return i;
+        }
+
+        throw new IllegalArgumentException("Invalid product " + String.valueOf(value));
     }
 
     //Return the product Id if the shelf in cell [line, column] has some product and 0 otherwise
     public int getProductInShelf(int line, int column){
-        //TODO:
-        throw new UnsupportedOperationException("Not implemented yet.");
+        LinkedList<Cell> shelves = problem.agentSearch.getShelves();
+        for (int i = 0; i < shelves.size(); i++) {
+            Cell c = shelves.get(i);
+
+            if(c.getColumn() == column && c.getLine() == line)
+            {
+                if(genome[i] <= problem.agentSearch.getNumProducts())
+                    return genome[i];
+                else
+                    return 0;
+            }
+        }
+
+        throw new IllegalArgumentException("Invalid shelf cell: " + new Cell(line, column).toString());
     }
 
     @Override
@@ -38,10 +95,12 @@ public class WarehouseIndividual extends IntVectorIndividual<WarehouseProblemFor
         StringBuilder sb = new StringBuilder();
         sb.append("fitness: ");
         sb.append(fitness);
-        sb.append("\npath: ");
+        sb.append("\npath:");
         for (int i = 0; i < genome.length; i++) {
-            sb.append(genome[i]).append(" ");
-            //this method might require changes
+            int product = (genome[i] <= problem.agentSearch.getNumProducts())
+                ? genome[i]
+                    : 0;
+            sb.append(" ").append(product);
         }
 
         return sb.toString();
