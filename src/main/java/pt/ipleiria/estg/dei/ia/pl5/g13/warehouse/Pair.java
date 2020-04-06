@@ -26,6 +26,12 @@ public class Pair {
         this.value = value;
     }
 
+    public boolean equals(Cell c1, Cell c2)
+    {
+        return (c1 == cell1 && c2 == cell2) ||
+                (c1 == cell2 && c2 == cell1);
+    }
+
     @Override
     public String toString() {
         return cell1.getLine() + "-" + cell1.getColumn() + " / " + cell2.getLine() + "-" + cell2.getColumn() + ": " + value + "\n";
