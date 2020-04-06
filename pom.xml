@@ -39,7 +39,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>pt.ipleiria.estg.dei.ia.pl5.g13.gui.Main</mainClass>
+                            <mainClass>pt.ipleiria.estg.dei.ia.pl5.g13.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

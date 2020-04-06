@@ -1,3 +1,2 @@
 Manifest-Version: 1.0
-Main-Class: pt.ipleiria.estg.dei.ia.pl5.g13.gui.Main
-
+Main-Class: pt.ipleiria.estg.dei.ia.pl5.g13.Main

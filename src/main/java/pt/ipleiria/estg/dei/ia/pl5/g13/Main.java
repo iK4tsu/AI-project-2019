@@ -1,7 +1,8 @@
-package pt.ipleiria.estg.dei.ia.pl5.g13.gui;
+package pt.ipleiria.estg.dei.ia.pl5.g13;
 
 import javax.swing.*;
 
+import pt.ipleiria.estg.dei.ia.pl5.g13.gui.*;
 import pt.ipleiria.estg.dei.ia.pl5.g13.experiments.ExperimentRunner;
 
 import java.awt.*;
