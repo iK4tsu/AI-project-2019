@@ -9,20 +9,21 @@ import pt.ipleiria.estg.dei.ia.pl5.g13.utils.Maths;
 import java.io.File;
 
 public class StatisticBestAverage<E extends Individual, P extends Problem<E>> implements GAListener  {
-    
+
     private final double[] values;
     private int run;
+    private File file;
 
-    public StatisticBestAverage(int numRuns, String experimentHeader) {
+    public StatisticBestAverage(int numRuns, String experimentHeader, String filename) {
         values = new double[numRuns];
-        File file = new File("statistic_average_fitness.xls");
-        if(!file.exists()){
-            FileOperations.appendToTextFile("statistic_average_fitness.xls", experimentHeader + "\t" + "Average:" + "\t" + "StdDev:" + "\r\n");
+        file = new File("statistic_average_fitness_" + filename + ".xls");
+        if (!file.exists()) {
+            FileOperations.appendToTextFile(file.getAbsolutePath(), experimentHeader + "\t" + "Average:" + "\t" + "StdDev:" + "\r\n");
         }
     }
 
     @Override
-    public void generationEnded(GAEvent e) {    
+    public void generationEnded(GAEvent e) {
     }
 
     @Override
@@ -38,6 +39,6 @@ public class StatisticBestAverage<E extends Individual, P extends Problem<E>> im
 
         String experimentConfigurationValues = ((Experiment) e.getSource()).getExperimentValues();
 
-        FileOperations.appendToTextFile("statistic_average_fitness.xls", experimentConfigurationValues + "\t" + average + "\t" + sd + "\r\n");
+        FileOperations.appendToTextFile(file.getAbsolutePath(), experimentConfigurationValues + "\t" + average + "\t" + sd + "\r\n");
     }
 }

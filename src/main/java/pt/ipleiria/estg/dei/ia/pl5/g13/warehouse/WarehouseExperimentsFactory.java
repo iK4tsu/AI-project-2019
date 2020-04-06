@@ -120,11 +120,12 @@ public class WarehouseExperimentsFactory extends ExperimentsFactory {
     private ExperimentListener buildStatistic(
             String statisticName,
             String experimentHeader) {
+        String filename = file.split(".+?/(?=[^/]+$)")[1];
         switch (statisticName) {
             case "BestIndividual":
-                return new StatisticBestInRun(experimentHeader);
+                return new StatisticBestInRun(experimentHeader, filename);
             case "BestAverage":
-                return new StatisticBestAverage(numRuns, experimentHeader);
+                return new StatisticBestAverage(numRuns, experimentHeader, filename);
         }
         return null;
     }
