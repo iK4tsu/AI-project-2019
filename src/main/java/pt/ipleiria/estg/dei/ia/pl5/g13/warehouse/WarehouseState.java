@@ -18,10 +18,11 @@ public class WarehouseState extends State implements Cloneable {
     private int steps;
 
     public WarehouseState(int[][] matrix) {
-        this.matrix = matrix;
+        this.matrix = new int[matrix.length][matrix.length];
 
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
+                this.matrix[i][j] = matrix[i][j];
                 switch (matrix[i][j])
                 {
                     // Door && Agent
@@ -42,16 +43,11 @@ public class WarehouseState extends State implements Cloneable {
 
     public void executeAction(Action action) {
         action.execute(this);
-        // TODO
-        throw new UnsupportedOperationException("Not implemented yet."); // delete after implementing
     }
 
     public void executeActionSimulation(Action action) {
         action.execute(this);
-        // TODO
-
         fireUpdatedEnvironment();
-        throw new UnsupportedOperationException("Not implemented yet."); // delete after implementing
     }
 
 
@@ -94,28 +90,39 @@ public class WarehouseState extends State implements Cloneable {
     }
 
     public void moveUp() {
-        lineAgent--;
+        matrix[lineAgent--][columnAgent] = 0;
+        matrix[lineAgent][columnAgent] = 1;
         steps++;
     }
 
     public void moveRight() {
-        columnAgent++;
+        matrix[lineAgent][columnAgent++] = 0;
+        matrix[lineAgent][columnAgent] = 1;
         steps++;
     }
 
     public void moveDown() {
-        lineAgent++;
+        matrix[lineAgent++][columnAgent] = 0;
+        matrix[lineAgent][columnAgent] = 1;
         steps++;
     }
 
     public void moveLeft() {
-        columnAgent--;
+        matrix[lineAgent][columnAgent--] = 0;
+        matrix[lineAgent][columnAgent] = 1;
         steps++;
     }
 
     public void setCellAgent(int line, int column) {
+        matrix[lineAgent][columnAgent] = 0;
         lineAgent = line;
         columnAgent = column;
+        matrix[lineAgent][columnAgent] = 1;
+    }
+
+    public void setCellExit(int line, int column) {
+        lineExit = line;
+        columnExit = column;
     }
 
     public int getSteps() {
@@ -158,8 +165,11 @@ public class WarehouseState extends State implements Cloneable {
 
     public boolean equalsAgent(Cell cell)
     {
-        return cell.getColumn() + 1 == columnAgent &&
-               cell.getLine() == lineAgent;
+        if (cell.getColumn() == columnExit && cell.getLine() == lineExit)
+            return columnExit == columnAgent && lineExit == lineAgent;
+        else
+            return cell.getColumn() + 1 == columnAgent &&
+                   cell.getLine() == lineAgent;
     }
 
     @Override
@@ -173,7 +183,7 @@ public class WarehouseState extends State implements Cloneable {
             return false;
         }
 
-        return Arrays.deepEquals(matrix, o.matrix) && (((WarehouseState) other).columnAgent == columnAgent && ((WarehouseState) other).lineAgent == lineAgent);
+        return Arrays.deepEquals(matrix, o.matrix);
     }
 
     @Override
@@ -198,7 +208,7 @@ public class WarehouseState extends State implements Cloneable {
     @Override
     public WarehouseState clone() {
         WarehouseState ret = new WarehouseState(matrix);
-        ret.setCellAgent(lineAgent, columnAgent);
+        ret.setCellExit(lineExit, columnExit);
         return ret;
     }
 
