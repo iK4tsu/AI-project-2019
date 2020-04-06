@@ -29,6 +29,16 @@ public class ExperimentRunner {
 		this.experimentsFactory = experimentsFactory;
 	}
 
+	public ExperimentRunner(File configurationFile) throws IOException
+	{
+		this.experimentsFactory = new WarehouseExperimentsFactory(configurationFile);
+	}
+
+	public double getProgress()
+	{
+		return ( (double) experimentsFactory.getCurExperimentIndex() / experimentsFactory.getNumExperiments() ) * 100;
+	}
+
 	public WarehouseProblemForGA run()
 	{
 		try {
@@ -47,7 +57,6 @@ public class ExperimentRunner {
 				p.setValue((int) s.getCost());
 			}
 			problemGA = new WarehouseProblemForGA(agentSearch);
-
 
 			while (experimentsFactory.hasMoreExperiments()) {
 				try {

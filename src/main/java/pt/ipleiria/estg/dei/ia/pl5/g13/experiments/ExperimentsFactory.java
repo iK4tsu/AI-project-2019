@@ -21,10 +21,18 @@ public abstract class ExperimentsFactory {
     protected Parameter[] orderedParametersVector;
     protected List<String> statisticsNames;
     protected List<ExperimentListener> statistics;
+    protected int currentExperimentIndex;
+    protected int numExperiments;
 
     public ExperimentsFactory(File configFile) throws IOException {
         readParametersFile(configFile);
         readStatisticsFile(configFile);
+
+        numExperiments = 0;
+        for (int i = 0; i < orderedParametersVector.length; i++) {
+            numExperiments += orderedParametersVector[i].getNumberOfValues();
+        }
+        numExperiments += orderedParametersVector.length;
     }
 
     protected abstract Experiment buildExperiment(WarehouseAgentSearch agentSearch) throws IOException;
@@ -35,9 +43,20 @@ public abstract class ExperimentsFactory {
         return orderedParametersVector[0].activeValueIndex < orderedParametersVector[0].getNumberOfValues();
     }
 
+    public int getCurExperimentIndex()
+    {
+        return currentExperimentIndex;
+    }
+
+    public int getNumExperiments()
+    {
+        return numExperiments;
+    }
+
     public Experiment nextExperiment(WarehouseAgentSearch agentSearch) throws IOException {
         if (hasMoreExperiments()) {
             Experiment experiment = buildExperiment(agentSearch);
+            currentExperimentIndex++;
             indicesManaging(orderedParametersVector.length - 1);
             return experiment;
         }
