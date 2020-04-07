@@ -44,7 +44,7 @@ public class MainFrame extends JFrame implements GAListener {
     private JButton buttonStop = new JButton("Stop");
     private JButton buttonRunSearch2 = new JButton("Search2");
     private JButton buttonExperiments = new JButton("Experiments");
-    private JButton buttonRunExperiments = new JButton("Run pt.ipleiria.estg.dei.ia.pl5.g13.experiments");
+    private JButton buttonRunExperiments = new JButton("Run experiments");
     private PanelParameters panelParameters = new PanelParameters(this);
     private JTextField textFieldExperimentsStatus = new JTextField("", 10);
     private XYSeries seriesBestIndividual;
