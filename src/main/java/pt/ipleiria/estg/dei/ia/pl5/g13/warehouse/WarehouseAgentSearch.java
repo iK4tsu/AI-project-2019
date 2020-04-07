@@ -116,4 +116,8 @@ public class WarehouseAgentSearch<S extends State> extends Agent<S> {
         return numProducts;
     }
 
+    public static Cell getShelf(int index)
+    {
+        return shelves.get(index);
+    }
 }

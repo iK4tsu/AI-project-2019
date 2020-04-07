@@ -2,6 +2,7 @@ package pt.ipleiria.estg.dei.ia.pl5.g13.gui;
 
 import pt.ipleiria.estg.dei.ia.pl5.g13.agentSearch.Solution;
 import pt.ipleiria.estg.dei.ia.pl5.g13.warehouse.WarehouseState;
+import pt.ipleiria.estg.dei.ia.pl5.g13.warehouse.Cell;
 import pt.ipleiria.estg.dei.ia.pl5.g13.warehouse.EnvironmentListener;
 import pt.ipleiria.estg.dei.ia.pl5.g13.warehouse.Properties;
 
@@ -23,7 +24,7 @@ public class PanelSimulation extends JPanel implements EnvironmentListener {
     JPanel environmentPanel = new JPanel();
     final PanelInformation panelInformation = new PanelInformation();
     final JButton buttonSimulate = new JButton("Simulate Each Request");
-    private int numRequest, numSteps;
+    private int numRequest, numSteps, indexRequest = 0;
 
     SwingWorker worker;
 
@@ -119,6 +120,25 @@ public class PanelSimulation extends JPanel implements EnvironmentListener {
         Graphics g = image.getGraphics();
         g.setFont(new Font("Arial", Font.PLAIN, 9));
 
+        // get the request number based on numRequest
+        // this executes once before numRequest is increased
+        int indexSolution = numRequest == 0 ? numRequest : numRequest - 1;
+
+        // get the next product index in the current request
+        // when the last product is catched, this var will get reseted
+        // otherwise an index out of bounds exception is thrown
+        if (indexRequest >= mainFrame.getAgentSearch().getRequests().get(indexSolution).getRequest().length)
+            indexRequest = 0;
+
+        // the genome with the current product placements
+        int[] genome = mainFrame.getBestInRun().getGenome();
+
+        // the next product in the current request
+        int nextRequest = mainFrame.getAgentSearch().getRequests().get(indexSolution).getRequest()[indexRequest];
+
+        // the shelf containing the next product
+        Cell shelf = mainFrame.getAgentSearch().getShelf(mainFrame.getBestInRun().getShelfPos(genome, nextRequest));
+
         //Fill the cells color
         boolean hasProduct;
         for (int y = 0; y < n; y++) {
@@ -129,8 +149,19 @@ public class PanelSimulation extends JPanel implements EnvironmentListener {
                     int product = mainFrame.getBestInRun().getProductInShelf(y, x);
                     if (product != 0) {
                         hasProduct = true;
-                        g.setColor(Properties.COLORSHELFPRODUCT);
-                        g.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+
+                        // if the shelf contains a product, check if it's the next in the request list
+                        // if it is, also check if the Agent is next to it
+                        // if it is catch the product and move on to the next one
+                        if (environment.equalsAgent(shelf) && environment.getColumnAgent() == x + 1 && environment.getLineAgent() == y) {
+                            indexRequest++;
+                            g.setColor(Properties.COLORSHELFPRODUCTCATCH);
+                            g.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                        }
+                        else {
+                            g.setColor(Properties.COLORSHELFPRODUCT);
+                            g.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                        }
                         g.setColor(Color.BLACK);
                         g.drawString(Integer.toString(product), x * CELL_SIZE + 2, y * CELL_SIZE + CELL_SIZE - 2);
                     }
