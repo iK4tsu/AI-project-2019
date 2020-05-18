@@ -54,6 +54,9 @@ public class WarehouseExperimentsFactory extends ExperimentsFactory {
             case "ox1":
                 recombination = new RecombinationOrder<>(recombinationProbability);
                 break;
+            case "ox2":
+                recombination = new RecombinationOrderBased<>(recombinationProbability);
+                break;
             case "cx":
                 recombination = new RecombinationCycle<>(recombinationProbability);
                 break;
