@@ -60,6 +60,9 @@ public class WarehouseExperimentsFactory extends ExperimentsFactory {
             case "cx":
                 recombination = new RecombinationCycle<>(recombinationProbability);
                 break;
+            case "pos":
+                recombination = new RecombinationPositionBased<>(recombinationProbability);
+                break;
         }
 
         //MUTATION
