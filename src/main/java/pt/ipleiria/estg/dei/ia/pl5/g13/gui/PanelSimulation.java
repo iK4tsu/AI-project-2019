@@ -75,6 +75,7 @@ public class PanelSimulation extends JPanel implements EnvironmentListener {
                         environment.setSteps(numSteps);
                     mainFrame.getAgentSearch().setEnvironment(environment);
                     numRequest++;
+                    indexRequest = 0;
                     mainFrame.getAgentSearch().executeSolutionSimulation((Solution) mainFrame.getAgentSearch().getSolutions().get(numRequest - 1));
                     numSteps = environment.getSteps();
 
@@ -128,7 +129,7 @@ public class PanelSimulation extends JPanel implements EnvironmentListener {
         // when the last product is catched, this var will get reseted
         // otherwise an index out of bounds exception is thrown
         if (indexRequest >= mainFrame.getAgentSearch().getRequests().get(indexSolution).getRequest().length)
-            indexRequest = 0;
+            indexRequest = mainFrame.getAgentSearch().getRequests().get(indexSolution).getRequest().length - 1;
 
         // the genome with the current product placements
         int[] genome = mainFrame.getBestInRun().getGenome();
