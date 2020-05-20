@@ -21,7 +21,7 @@ public abstract class IntVectorIndividual<P extends Problem, I extends IntVector
         // set the genome with suffled values
         for (int i = 0; i < genome.length; i++)
             setGene(i, productsArray[i]);
-      }
+    }
 
     public IntVectorIndividual(IntVectorIndividual<P, I> original) {
         super(original);

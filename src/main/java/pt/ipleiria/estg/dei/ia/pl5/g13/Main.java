@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class Main {
 
-    public Main() {
+	public Main() {
 
 	MainFrame frame = new MainFrame();
 
@@ -25,10 +25,10 @@ public class Main {
 		frameSize.width = screenSize.width;
 	}
 	frame.setLocation((screenSize.width - frameSize.width) / 2,
-			  (screenSize.height - frameSize.height) / 2);
+						(screenSize.height - frameSize.height) / 2);
 
 	frame.setVisible(true);
-    }
+	}
 
 	public static void main(String[] args) {
 		if (args.length == 1)
@@ -64,10 +64,10 @@ public class Main {
 						UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					} catch (Exception exception) {
 						exception.printStackTrace();
-			   }
-			   new Main();
+					}
+					new Main();
 				}
-		   });
+			});
 		}
-    }
+	}
 }

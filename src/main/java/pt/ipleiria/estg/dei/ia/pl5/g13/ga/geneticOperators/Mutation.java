@@ -7,7 +7,7 @@ import pt.ipleiria.estg.dei.ia.pl5.g13.ga.Problem;
 import static pt.ipleiria.estg.dei.ia.pl5.g13.ga.GeneticAlgorithm.random;
 
 public abstract class Mutation <I extends Individual, P extends Problem<I>> extends GeneticOperator{
-    
+
     public Mutation(double probability){
         super(probability);
     }

@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class WarehouseProblemForSearch<S extends WarehouseState> extends Problem<S> {
+
     private LinkedList<Action> actions;
     private final Cell goalPosition;
 

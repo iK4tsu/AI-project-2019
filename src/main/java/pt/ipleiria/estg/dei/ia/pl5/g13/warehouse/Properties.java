@@ -3,6 +3,7 @@ package pt.ipleiria.estg.dei.ia.pl5.g13.warehouse;
 import java.awt.*;
 
 public interface Properties {
+
     int SHELF = 2;
     int AGENT = 1;
     int EMPTY = 0;

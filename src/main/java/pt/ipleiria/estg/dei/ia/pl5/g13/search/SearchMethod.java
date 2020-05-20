@@ -5,11 +5,11 @@ import pt.ipleiria.estg.dei.ia.pl5.g13.agentSearch.Solution;
 
 public interface SearchMethod {
 
-   Solution search(Problem problem);
-   
-   Statistics getStatistics();
-   
-   void stop();
-   
-   boolean hasBeenStopped();
+	Solution search(Problem problem);
+
+	Statistics getStatistics();
+
+	void stop();
+
+	boolean hasBeenStopped();
 }

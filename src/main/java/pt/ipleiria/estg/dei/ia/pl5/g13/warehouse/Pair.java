@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ia.pl5.g13.warehouse;
 
 public class Pair {
+
     private Cell cell1;
     private Cell cell2;
     private int value;
@@ -34,6 +35,10 @@ public class Pair {
 
     @Override
     public String toString() {
-        return cell1.getLine() + "-" + cell1.getColumn() + " / " + cell2.getLine() + "-" + cell2.getColumn() + ": " + value + "\n";
+        return cell1.getLine() + "-"
+                + cell1.getColumn() + " / "
+                + cell2.getLine() + "-"
+                + cell2.getColumn() + ": "
+                + value + "\n";
     }
 }

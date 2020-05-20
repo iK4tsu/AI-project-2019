@@ -16,8 +16,8 @@ public class Node implements Comparable<Node> {
 
     public Node(State state, Node parent) {
         this(state, parent, 0, 0);
-    }    
-    
+    }
+
     public Node(State state, Node parent, double cost, double f) {
         this.state = state;
         this.cost = cost;
@@ -62,7 +62,7 @@ public class Node implements Comparable<Node> {
 
         return false;
     }
-    
+
     @Override
     public String toString(){
         return "" + f;

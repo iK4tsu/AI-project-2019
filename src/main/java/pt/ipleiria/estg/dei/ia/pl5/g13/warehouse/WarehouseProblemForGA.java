@@ -3,6 +3,7 @@ package pt.ipleiria.estg.dei.ia.pl5.g13.warehouse;
 import pt.ipleiria.estg.dei.ia.pl5.g13.ga.Problem;
 
 public class WarehouseProblemForGA implements Problem<WarehouseIndividual> {
+
     WarehouseAgentSearch agentSearch;
 
     public WarehouseProblemForGA(WarehouseAgentSearch agentSearch) {

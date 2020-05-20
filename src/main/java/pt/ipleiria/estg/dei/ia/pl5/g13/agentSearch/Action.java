@@ -1,10 +1,11 @@
 package pt.ipleiria.estg.dei.ia.pl5.g13.agentSearch;
 
 
-public abstract class Action <S extends State>{
+public abstract class Action <S extends State> {
+
     private final double cost;
 
-    public Action(double cost){
+    public Action(double cost) {
         this.cost = cost;
     }
 

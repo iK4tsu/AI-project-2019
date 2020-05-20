@@ -42,8 +42,8 @@ public class RecombinationOrder<I extends IntVectorIndividual, P extends Problem
         int curP1 = 0;
         int curP2 = 0;
 
-        for (int i = 0; i < size; i++) {
-
+        for (int i = 0; i < size; i++)
+        {
             idx = (end + i) % size;
 
             curP1 = ind1.getGene(idx);

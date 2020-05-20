@@ -22,7 +22,8 @@ public class Experiment <E extends ExperimentsFactory, P extends Problem>{
             P problem,
             String experimentTextualRepresentation,
             String experimentHeader,
-            String experimentValues) {
+            String experimentValues)
+    {
         this.factory = factory;
         this.numRuns = numRuns;
         this.problem = problem;
@@ -65,9 +66,9 @@ public class Experiment <E extends ExperimentsFactory, P extends Problem>{
             listener.experimentEnded(new ExperimentEvent(this));
         }
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return experimentTextualRepresentation;
     }
 }

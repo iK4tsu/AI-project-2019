@@ -13,6 +13,7 @@ import pt.ipleiria.estg.dei.ia.pl5.g13.warehouse.WarehouseProblemForSearch;
 import pt.ipleiria.estg.dei.ia.pl5.g13.warehouse.WarehouseState;
 
 public class ExperimentRunner {
+
 	private WarehouseExperimentsFactory experimentsFactory;
 	private WarehouseProblemForGA problemGA;
 

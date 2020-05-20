@@ -339,13 +339,12 @@ public class MainFrame extends JFrame implements GAListener {
                                 if (i != r.getRequest().length) {
                                     cell = (Cell) agentSearch.getShelves().get(WarehouseIndividual.getShelfPos(genome, r.getRequest()[i]));
 
-                                } else
+                                } else {
                                     cell = agentSearch.getExit();
+                                }
 
-                                 WarehouseProblemForSearch problem = new WarehouseProblemForSearch(auxState, cell);
-
+                                WarehouseProblemForSearch problem = new WarehouseProblemForSearch(auxState, cell);
                                 auxSolution = agentSearch.solveProblem(problem);
-
                                 auxState = (WarehouseState) agentSearch.executeSolution();
 
                                 if (i == 0)
@@ -452,14 +451,15 @@ public class MainFrame extends JFrame implements GAListener {
     }
 
     public void manageButtons(
-            boolean dataSet,
-            boolean runGA,
-            boolean runSearch,
-            boolean stopRun,
-            boolean runSearch2,
-            boolean experiments,
-            boolean runExperiments,
-            boolean runEnvironment) {
+                    boolean dataSet,
+                    boolean runGA,
+                    boolean runSearch,
+                    boolean stopRun,
+                    boolean runSearch2,
+                    boolean experiments,
+                    boolean runExperiments,
+                    boolean runEnvironment)
+    {
         buttonDataSet.setEnabled(dataSet);
         buttonRunGA.setEnabled(runGA);
         buttonRunSearch.setEnabled(runSearch);
@@ -469,8 +469,8 @@ public class MainFrame extends JFrame implements GAListener {
         buttonRunExperiments.setEnabled(runExperiments);
         if (simulationPanel != null)
             simulationPanel.setJButtonSimulateEnabled(runEnvironment);
-            if(runEnvironment)
-                simulationPanel.setNumRequest(0);
+        if(runEnvironment)
+            simulationPanel.setNumRequest(0);
     }
 
     public PanelParameters getPanelParameters() {

@@ -9,8 +9,6 @@ import java.util.Arrays;
 
 public class WarehouseState extends State implements Cloneable {
 
-    //TODO: this class might require the definition of additional methods and/or attributes
-
     private int[][] matrix;
     private int lineAgent, columnAgent;
     private int lineExit;
@@ -166,10 +164,15 @@ public class WarehouseState extends State implements Cloneable {
     public boolean equalsAgent(Cell cell)
     {
         if (cell.getColumn() == columnExit && cell.getLine() == lineExit)
-            return columnExit == columnAgent && lineExit == lineAgent;
+        {
+            return columnExit == columnAgent
+                    && lineExit == lineAgent;
+        }
         else
-            return cell.getColumn() + 1 == columnAgent &&
-                   cell.getLine() == lineAgent;
+        {
+            return cell.getColumn() + 1 == columnAgent
+                    && cell.getLine() == lineAgent;
+        }
     }
 
     @Override

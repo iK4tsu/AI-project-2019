@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ia.pl5.g13.warehouse;
 
 public class Cell {
+
     private final int line;
     private final int column;
 

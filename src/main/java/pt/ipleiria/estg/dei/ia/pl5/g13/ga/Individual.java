@@ -15,10 +15,10 @@ public abstract class Individual<P extends Problem, I extends Individual> implem
     }
 
     public abstract double computeFitness();
-    
+
     public abstract int getNumGenes();
-    
-    public abstract void swapGenes(I other, int g);    
+
+    public abstract void swapGenes(I other, int g);
 
     public double getFitness() {
         return fitness;
